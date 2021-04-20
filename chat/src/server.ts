@@ -1,9 +1,15 @@
-import express, { json } from "express";
+import express from "express";
+import "reflect-metadata";
+import "./database";
+
+import { routes } from "./routes";
 
 // * Express Instance
 const app = express();
 
 const PORT = 3000;
+
+app.use(express.json()).use(routes);
 
 app
   .get("/", (_req, res) => {
