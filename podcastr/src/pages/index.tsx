@@ -6,6 +6,8 @@ import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from "./Home.module.scss";
+import { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 
 interface Episode {
   id: string;
@@ -27,6 +29,8 @@ const IndexPage: React.FunctionComponent<Props> = ({
   latestEpisodes,
   allEpisodes,
 }) => {
+  const { play } = useContext(PlayerContext);
+
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
@@ -50,7 +54,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Play Episode" />
                 </button>
               </li>
@@ -66,10 +70,10 @@ const IndexPage: React.FunctionComponent<Props> = ({
             <tr>
               <th></th>
               <th>Podcast</th>
-
               <th>Members</th>
               <th>Date</th>
               <th>Duration</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -93,6 +97,11 @@ const IndexPage: React.FunctionComponent<Props> = ({
                   <td>{episode.members}</td>
                   <td style={{ width: 100 }}>{episode.published_at}</td>
                   <td>{episode.durationAsString}</td>
+                  <td>
+                    <button type="button" onClick={() => play(episode)}>
+                      <img src="/play-green.svg" alt="Play Episode" />
+                    </button>
+                  </td>
                 </tr>
               );
             })}

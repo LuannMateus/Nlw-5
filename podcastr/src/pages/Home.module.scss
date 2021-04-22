@@ -113,13 +113,22 @@
 .allEpisodes {
   padding-bottom: 2rem;
 
+  width: 100%;
+
   table {
     width: 100%;
+
+    thead {
+      th {
+        text-align: start;
+      }
+    }
 
     th,
     td {
       padding: 0.75rem 1rem;
       border-radius: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-100);
     }
 
     th {
@@ -148,6 +157,28 @@
 
         &:hover {
           text-decoration: underline;
+        }
+      }
+
+      button {
+        position: relative;
+
+        width: 2rem;
+        height: 2rem;
+        background: var(--white);
+        border: 1px solid var(--gray-100);
+        border-radius: 0.5rem;
+        font-size: 0;
+
+        transition: filter 0.2s;
+
+        img {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+
+        &:hover {
+          filter: brightness(0.95);
         }
       }
     }
