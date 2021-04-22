@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 
 @Entity("settings")
-class Settings {
+class Setting {
   @PrimaryColumn()
   id: string;
 
@@ -23,4 +23,4 @@ class Settings {
   }
 }
 
-export { Settings };
+export { Setting };

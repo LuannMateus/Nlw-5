@@ -9,7 +9,7 @@ const app = express();
 
 const PORT = 3000;
 
-app.use(express.json()).use(routes);
+app.use(express.json()).use("/api", routes);
 
 app
   .get("/", (_req, res) => {
