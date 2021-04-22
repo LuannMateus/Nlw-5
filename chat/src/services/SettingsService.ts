@@ -24,6 +24,18 @@ class SettingsService {
     }
   }
 
+  async findByUsername(username: string) {
+    try {
+      const settings = await this.settingsRepository.findOne({
+        username,
+      });
+
+      return settings;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async create({ chat, username }: ISettingsInterface) {
     const userAlreadyExists = await this.settingsRepository.findOne({
       username,
@@ -37,6 +49,19 @@ class SettingsService {
     });
 
     await this.settingsRepository.save(settings);
+
+    return settings;
+  }
+
+  async update(username: string, chat: boolean) {
+    const settings = this.settingsRepository
+      .createQueryBuilder()
+      .update(Setting)
+      .set({ username, chat })
+      .where("username = :username", {
+        username,
+      })
+      .execute();
 
     return settings;
   }

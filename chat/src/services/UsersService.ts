@@ -13,6 +13,16 @@ class UsersService {
     this.userRepository = getCustomRepository(UsersRepository);
   }
 
+  async getAll() {
+    try {
+      const users = this.userRepository.find();
+
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async create({ email }: IUserInterface) {
     try {
       const userAlreadyExists = await this.userRepository.findOne({ email });
@@ -21,9 +31,23 @@ class UsersService {
 
       const user = this.userRepository.create({ email });
 
-      this.userRepository.save(user);
+      await this.userRepository.save(user);
 
       return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByEmail({ email }: IUserInterface) {
+    try {
+      const user = await this.userRepository.findOne({ email });
+
+      if (user) {
+        return user;
+      } else {
+        return null;
+      }
     } catch (error) {
       throw error;
     }

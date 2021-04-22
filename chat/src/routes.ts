@@ -13,9 +13,13 @@ const messagesController = new MessagesController();
 
 routes
   .get("/settings", settingsController.getAll)
-  .post("/settings", settingsController.create);
+  .get("/settings/:username", settingsController.findByUsername)
+  .post("/settings", settingsController.create)
+  .put("/settings/:username", settingsController.update);
 
-routes.get("").post("/users", usersController.create);
+routes
+  .get("/users", usersController.getAll)
+  .post("/users", usersController.create);
 
 routes
   .get("/messages/:id", messagesController.showByUser)
