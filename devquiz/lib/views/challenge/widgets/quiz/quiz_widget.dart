@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class QuizWidget extends StatelessWidget {
   final String title;
 
-  const QuizWidget({this.title});
+  const QuizWidget({required this.title});
 
   @override
   Widget build(BuildContext context) {

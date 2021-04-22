@@ -1,6 +1,5 @@
 import 'package:devquiz/core/core.dart';
 import 'package:devquiz/shared/widgets/progress_indicator/progress_indicator_widget.dart';
-import 'package:devquiz/views/challenge/widgets/awnser/awnser_widget.dart';
 import 'package:flutter/material.dart';
 
 class QuestionIndicatorWidget extends StatelessWidget {

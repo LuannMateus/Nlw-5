@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class ProgressIndicatorWidget extends StatelessWidget {
   final double value;
 
-  const ProgressIndicatorWidget({@required this.value});
+  const ProgressIndicatorWidget({required this.value});
 
   @override
   Widget build(BuildContext context) {
     return LinearProgressIndicator(
-      value: 0.3,
+      value: value,
       backgroundColor: AppColors.chartSecondary,
       valueColor: AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
     );
