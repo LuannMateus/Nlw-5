@@ -1,13 +1,14 @@
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 import { format, parseISO } from "date-fns";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 
 import styles from "./Home.module.scss";
-import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+
+import { usePlayer } from "../contexts/PlayerContext";
 
 interface Episode {
   id: string;
@@ -29,14 +30,19 @@ const IndexPage: React.FunctionComponent<Props> = ({
   latestEpisodes,
   allEpisodes,
 }) => {
-  const { play } = useContext(PlayerContext);
+  const { playlist } = usePlayer();
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
     <div className={styles.homepage}>
+      <Head>
+        <title>Home | Podcastr</title>
+      </Head>
       <section className={styles.latestEpisodes}>
         <h2>Last releases</h2>
         <ul>
-          {latestEpisodes.map((episode) => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id}>
                 <Image
@@ -48,13 +54,18 @@ const IndexPage: React.FunctionComponent<Props> = ({
                 />
 
                 <div className={styles.episodeDetails}>
-                  <a href="">{episode.title}</a>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <a>{episode.title}</a>
+                  </Link>
                   <p>{episode.members}</p>
                   <span>{episode.published_at}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button" onClick={() => play(episode)}>
+                <button
+                  type="button"
+                  onClick={() => playlist(episodeList, index)}
+                >
                   <img src="/play-green.svg" alt="Play Episode" />
                 </button>
               </li>
@@ -77,7 +88,7 @@ const IndexPage: React.FunctionComponent<Props> = ({
             </tr>
           </thead>
           <tbody>
-            {allEpisodes.map((episode) => {
+            {allEpisodes.map((episode, index) => {
               return (
                 <tr key={episode.id}>
                   <td style={{ width: 72 }}>
@@ -98,7 +109,12 @@ const IndexPage: React.FunctionComponent<Props> = ({
                   <td style={{ width: 100 }}>{episode.published_at}</td>
                   <td>{episode.durationAsString}</td>
                   <td>
-                    <button type="button" onClick={() => play(episode)}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        playlist(episodeList, index + latestEpisodes.length)
+                      }
+                    >
                       <img src="/play-green.svg" alt="Play Episode" />
                     </button>
                   </td>
