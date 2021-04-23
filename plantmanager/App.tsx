@@ -7,14 +7,14 @@ import {
   Jost_400Regular,
   Jost_600SemiBold,
 } from "@expo-google-fonts/jost";
+import { Text } from "react-native";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    Jost_400Regular,
-    Jost_600SemiBold,
-  });
-
-  if (!fontsLoaded) return <AppLoading />;
-
-  return <Routes />;
+  // const [fontsLoaded] = useFonts({
+  //   Jost_400Regular,
+  //   Jost_600SemiBold,
+  // });
+  // if (!fontsLoaded) return <AppLoading />;
+  // return <Routes />;
+  return <Text>HI</Text>;
 }
