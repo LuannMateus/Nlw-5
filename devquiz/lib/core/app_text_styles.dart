@@ -42,7 +42,7 @@ class AppTextStyles {
 
   static final TextStyle bodyBold = GoogleFonts.notoSans(
     color: AppColors.grey,
-    fontSize: 13,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
   );
 

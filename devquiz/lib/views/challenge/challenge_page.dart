@@ -3,12 +3,19 @@ import 'package:devquiz/views/challenge/challenge_controller.dart';
 import 'package:devquiz/views/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:devquiz/views/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:devquiz/views/challenge/widgets/quiz/quiz_widget.dart';
+import 'package:devquiz/views/result/result_page.dart';
 import 'package:flutter/material.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
+  final String title;
+  final int length;
 
-  const ChallengePage({required this.questions});
+  const ChallengePage({
+    required this.questions,
+    required this.title,
+    required this.length,
+  });
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
@@ -40,6 +47,11 @@ class _ChallengePageState extends State<ChallengePage> {
       );
   }
 
+  void onSelected(bool value) {
+    if (value) controller.qtdAnwserRight++;
+    nextPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +80,7 @@ class _ChallengePageState extends State<ChallengePage> {
         children: widget.questions
             .map((question) => QuizWidget(
                   question: question,
-                  onChange: nextPage,
+                  onSelected: onSelected,
                 ))
             .toList(),
       ),
@@ -95,7 +107,15 @@ class _ChallengePageState extends State<ChallengePage> {
                       child: NextButtonWidget.green(
                     label: "Confirm",
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResultPage(
+                                  title: widget.title,
+                                  length: widget.length,
+                                  result: controller.qtdAnwserRight,
+                                )),
+                      );
                     },
                   )),
               ],

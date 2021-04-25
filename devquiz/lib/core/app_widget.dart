@@ -1,4 +1,4 @@
-import 'package:devquiz/views/home_page/home_page.dart';
+import 'package:devquiz/views/splash_page/splash_page.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -6,7 +6,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "DevQuiz",
-      home: HomePage(),
+      home: SplashPage(),
     );
   }
 }
