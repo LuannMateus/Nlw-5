@@ -11,7 +11,7 @@
           { "title": "I like!" },
           { "title": "I love Flutter!" },
           { "title": "Very Cool!" },
-          { "title": "Incredible!" }
+          { "title": "Incredible!", "isRight": true }
         ]
       },
       {
@@ -20,8 +20,9 @@
           { "title": "I like!" },
           { "title": "I love Flutter!" },
           { "title": "Very Cool!" },
-          { "title": "Incredible!" }
-        ]
+          { "title": "Incredible!", "isRight": true }
+        ],
+        "isRight": 0
       }
     ]
   }
