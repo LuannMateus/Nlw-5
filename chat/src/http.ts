@@ -20,12 +20,12 @@ app.set("view engine", "html");
 const http = createServer(app);
 const io = new Server(http);
 
-io.on("connection", (socket: Socket) => {
-  // console.log("Connected", socket.id);
+app.get("/pages/client", (_req, res) => {
+  return res.render("html/client.html");
 });
 
-app.get("/", (_req, res) => {
-  return res.render("html/client.html");
+app.get("/pages/admin", (_req, res) => {
+  return res.render("html/admin.html");
 });
 
 app.use(express.json()).use("/api", routes);
