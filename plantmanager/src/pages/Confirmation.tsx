@@ -8,6 +8,12 @@ import { Button } from "../components/Button";
 type Props = {};
 
 export const Confirmation = (props: Props) => {
+  const navigation = useNavigation();
+
+  const handleMoveOn = () => {
+    navigation.navigate("PlantSelect");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -17,7 +23,7 @@ export const Confirmation = (props: Props) => {
           Now we will take care of your {"\n"} plants with great affection
         </Text>
         <View style={styles.footer}>
-          <Button title="Confirm" />
+          <Button title="Confirm" onPress={handleMoveOn} />
         </View>
       </View>
     </SafeAreaView>
