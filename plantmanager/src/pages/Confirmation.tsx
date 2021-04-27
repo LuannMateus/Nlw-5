@@ -1,29 +1,49 @@
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation, useRoute } from "@react-navigation/core";
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 import { Button } from "../components/Button";
 
-type Props = {};
+interface Params {
+  title: string;
+  subtitle: string;
+  buttonTitle: string;
+  icon: "smile" | "hug";
+  nextScreen: string;
+}
+
+const emojis = {
+  hug: "🤗",
+  smile: "😊",
+};
+
+interface Props {}
 
 export const Confirmation = (props: Props) => {
   const navigation = useNavigation();
+  const routes = useRoute();
+
+  const {
+    title,
+    subtitle,
+    buttonTitle,
+    icon,
+    nextScreen,
+  } = routes.params as Params;
 
   const handleMoveOn = () => {
-    navigation.navigate("PlantSelect");
+    navigation.navigate(`${nextScreen}`);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.emoji}>😄</Text>
-        <Text style={styles.title}>Ready</Text>
-        <Text style={styles.subtitle}>
-          Now we will take care of your {"\n"} plants with great affection
-        </Text>
+        <Text style={styles.emoji}>{emojis[icon]}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subtitle}>{subtitle}</Text>
         <View style={styles.footer}>
-          <Button title="Confirm" onPress={handleMoveOn} />
+          <Button title={buttonTitle} onPress={handleMoveOn} />
         </View>
       </View>
     </SafeAreaView>

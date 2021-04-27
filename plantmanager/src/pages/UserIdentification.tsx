@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   SafeAreaView,
@@ -10,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
+  Alert,
 } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import colors from "../../styles/colors";
@@ -25,8 +27,21 @@ const UserIdentification = (props: Props) => {
 
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
-    navigation.navigate("Confirmation");
+  const handleSubmit = async () => {
+    if (!name) return Alert.alert(`Please, tell me how to call you! 😥`);
+
+    try {
+      await AsyncStorage.setItem("@plantmanager:user", name);
+      navigation.navigate("Confirmation", {
+        title: "Ready",
+        subtitle: `Now we will take care of your ${"\n"} plants with great affection`,
+        buttonTitle: "Ok",
+        icon: "smile",
+        nextScreen: "PlantSelect",
+      });
+    } catch {
+      Alert.alert("Couldn't save your name. ;-; ");
+    }
   };
 
   const handleInputFocus = () => {
