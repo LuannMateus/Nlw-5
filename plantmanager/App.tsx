@@ -13,6 +13,7 @@ export default function App() {
     Jost_400Regular,
     Jost_600SemiBold,
   });
+
   if (!fontsLoaded) return <AppLoading />;
   return <Routes />;
 }
